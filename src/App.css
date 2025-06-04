@@ -1,0 +1,6 @@
+@import "tailwindcss";
+@layer utilities{
+    .shadow-custom-gray{
+        box-shadow: 0 0 8px 4px rgba(209, 174, 214, 0.5);
+    }
+}
