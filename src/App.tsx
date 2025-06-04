@@ -5,7 +5,7 @@ import CardCollection from './components/CardCollection'
 import { TopBar } from './components/TopBar'
 import Button from './components/ui/Button'
 import { Card } from './components/ui/Card'
-import { NavSidebar } from './components/ui/NavSideBar'
+import  NavSidebar  from './components/ui/NavSideBar'
 import BrainIcon from './icons/BrainIcon'
 
 /*
