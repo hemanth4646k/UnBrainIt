@@ -1,8 +1,11 @@
 
-import Embed from 'react-embed'
 import './App.css'
+import AddContentButton from './components/AddContentButton'
+import CardCollection from './components/CardCollection'
+import { TopBar } from './components/TopBar'
 import Button from './components/ui/Button'
 import { Card } from './components/ui/Card'
+import { NavSidebar } from './components/ui/NavSideBar'
 import BrainIcon from './icons/BrainIcon'
 
 /*
@@ -29,18 +32,14 @@ function App() {
 //     </div>
 
 //   )
-    return(
-      <div className='h-screen w-full flex bg-violet-50'>
-        {/* <NavSidebar></NavSidebar> */}
-        <Card link="https://www.youtube.com/watch/KxmYv2MfWdI?si=dn9FUWLZfR9cPqUs" 
-        title="This is title" tags={[]}></Card>
-        <Card link="https://www.youtube.com/watch?v=w4EZwfxmPYg" 
-        title="This is title" tags={[]}></Card>
-        <Card link="https://youtu.be/w4EZwfxmPYg?si=7g_O3jzuUWjbsi91" 
-        title="This is title" tags={[]}></Card>
-        <Card link="https://twitter.com/username/status/807811447862468608" 
-        title="X post" tags={[]}></Card>
-        {/* <Embed url='https://youtu.be/w4EZwfxmPYg?si=7g_O3jzuUWjbsi91'></Embed> */}
+    return (
+      <div className='h-screen w-screen flex '>
+        <NavSidebar></NavSidebar>
+        <div className='flex-1 overflow-auto'>
+          <TopBar></TopBar>
+          <CardCollection></CardCollection>
+        </div>
+
       </div>
     )
 }

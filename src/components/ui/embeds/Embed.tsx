@@ -31,9 +31,10 @@ function detectWebsite(url: string): string {
 export default function Embed(props:EmbedProps){
     const site=detectWebsite(props.link);
     return (
-        <div className="flex justify-center">
-            {site=="YouTube"&&<YouTubeEmbed link={props.link.replace("watch","embed")}/>}
-            {site=="X"&&<XEmbed link={props.link}/>}
+        <div className="flex justify-center w-5/6 overflow-auto">
+            {site=="YouTube"&&<YouTubeEmbed link={props.link}/>}
+            {<XEmbed link={props.link}/>}
         </div>
     )
 }
+
