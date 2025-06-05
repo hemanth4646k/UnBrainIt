@@ -18,7 +18,7 @@ export default function AddContentButton({openCreateContentModal,setOpenCreateCo
             ></Button>
           </div>
           <div className='m-5 md:hidden block'>
-            <Button onclick={()=>{setOpenCreateContentModal(true)}}
+            <Button onclick={()=>{setOpenCreateContentModal(true);}}
             size='sm' text='Add New' variant='primary' startIcon='plus'
             
             ></Button>

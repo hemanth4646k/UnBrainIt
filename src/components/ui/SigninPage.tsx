@@ -1,10 +1,9 @@
 import axios from "axios";
-import { InputComponent } from "../CreateContentModal";
 import Button from "./Button";
 import { BACKEND_URL } from "../../../config";
 import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import DashBoard from "../Dashboard";
+import { InputComponent } from "./InputComponent";
 
 export default function SigninPage(){
     const usernameRef=useRef<HTMLInputElement>(null);
