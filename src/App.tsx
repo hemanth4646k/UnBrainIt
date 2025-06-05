@@ -35,7 +35,7 @@ function App() {
     return (
       <div className='h-screen w-screen flex '>
         <NavSidebar></NavSidebar>
-        <div className='flex-1 overflow-auto'>
+        <div className='flex-1 overflow-auto @container md:pl-[59px] lg:pl-0 '>
           <TopBar></TopBar>
           <CardCollection></CardCollection>
         </div>

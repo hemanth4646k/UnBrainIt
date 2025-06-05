@@ -8,19 +8,22 @@ export default function NavSideBar() {
     
   return (
     
-      <div className={`p-2  transition-all bg-slate-900 duration-500 ease-in-out delay-200 ${open? "lg:w-3/13 w-[59px]":"lg:w-[59px] w-[190px] "}`}>
-        <div className="flex bg-red-200 rounded-xl max-h-[48px] justify-between flex-row-reverse p-1"  >
-            {open?<SideBarClose  setOpen={setOpen}/>:<SideBarOpenIcon setOpen={setOpen}/>}
-            <div className={`w-full flex p-2 transition-all items-center ${open?"lg:opacity-100 lg:scale-100 lg:delay-700 scale-0 opacity-0":"lg:opacity-0 lg:scale-0 lg:delay-0 delay-700 scale-75 opacity-100"}  `} >
-                Toggle Sidebar
-            </div>
+    <div className={`p-2 md:fixed lg:relative z-100 h-full transition-all bg-slate-900 duration-500 ease-in-out delay-200 ${open? "lg:w-3/13 w-[59px]":"lg:w-[59px] w-[190px] "}`}>
+        {/* <div className={``}> */}
 
-        </div>
-        <SidebarOption open={open} name="Home"/>
-        <SidebarOption open={open} name="Skills"/>
-        <SidebarOption open={open} name="Projects"/>
-        <SidebarOption open={open} name="Experience"/>
-        <SidebarOption open={open} name="Contact"/>
+          <div className="flex bg-red-200 rounded-xl max-h-[48px] justify-between flex-row-reverse p-1"  >
+              {open?<SideBarClose  setOpen={setOpen}/>:<SideBarOpenIcon setOpen={setOpen}/>}
+              <div className={`w-full flex p-2 transition-all items-center ${open?"lg:opacity-100 lg:scale-100 lg:delay-700 scale-0 opacity-0":"lg:opacity-0 lg:scale-0 lg:delay-0 delay-700 scale-75 opacity-100"}  `} >
+                  Toggle Sidebar
+              </div>
+
+          </div>
+          <SidebarOption open={open} name="Home"/>
+          <SidebarOption open={open} name="Skills"/>
+          <SidebarOption open={open} name="Projects"/>
+          <SidebarOption open={open} name="Experience"/>
+          <SidebarOption open={open} name="Contact"/>
+        {/* </div> */}
       </div>
     
   );
