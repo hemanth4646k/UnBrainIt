@@ -1,8 +1,5 @@
-
-import ShareIcon from "../../icons/ShareIcon";
 import { CardTitle } from "./CardTitle";
 import Embed from "./embeds/Embed";
-import { YouTubeEmbed } from "./embeds/YoutubeEmbed";
 
 interface CardProps{
     title:string;

@@ -1,20 +1,26 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { SideBarOpenIcon } from "../../icons/SideBarOpen";
 import { SideBarClose } from "../../icons/SideBarClose";
 import { HomeIcon } from "../../icons/HomeIcon";
+import BrainIcon from "../../icons/BrainIcon";
 
 export default function NavSideBar() {
     const [open,setOpen]=useState(true);
     
   return (
     
-    <div className={`p-2 md:fixed lg:relative z-100 h-full transition-all bg-slate-900 duration-500 ease-in-out delay-200 ${open? "lg:w-3/13 w-[59px]":"lg:w-[59px] w-[190px] "}`}>
+    <div className={`p-2 hidden md:block md:fixed lg:relative z-100 md:h-full md:transition-all bg-violet-200 md:duration-500 md:ease-in-out md:delay-200 ${open? "lg:w-[250px] md:w-[59px]":"lg:w-[59px] md:w-[190px] "}`}>
         {/* <div className={``}> */}
 
-          <div className="flex bg-red-200 rounded-xl max-h-[48px] justify-between flex-row-reverse p-1"  >
-              {open?<SideBarClose  setOpen={setOpen}/>:<SideBarOpenIcon setOpen={setOpen}/>}
+          <div className="flex bg-violet-950 rounded-xl max-h-[48px] justify-between flex-row-reverse p-1"  >
+              <div className="lg:block hidden flex justify-center items-center w-[59px]">
+              {open?<SideBarClose color="stroke-cyan-50" setOpen={setOpen}/>:<SideBarOpenIcon color="stroke-white" setOpen={setOpen}/>}
+              </div>
+              <div className="lg:hidden block flex justify-center items-center w-[59px]">
+              {open?<SideBarOpenIcon color="stroke-white" setOpen={setOpen}/>:<SideBarClose color="stroke-white" setOpen={setOpen}/>}
+              </div>
               <div className={`w-full flex p-2 transition-all items-center ${open?"lg:opacity-100 lg:scale-100 lg:delay-700 scale-0 opacity-0":"lg:opacity-0 lg:scale-0 lg:delay-0 delay-700 scale-75 opacity-100"}  `} >
-                  Toggle Sidebar
+                  <BrainIcon size="md" color="yellow"></BrainIcon>
               </div>
 
           </div>
@@ -29,15 +35,18 @@ export default function NavSideBar() {
   );
 }
 interface SidebarOptionProps{
-    open:boolean;
+    open?:boolean;
     name:string;
 }
-function SidebarOption(props:SidebarOptionProps) {
+export function SidebarOption(props:SidebarOptionProps) {
   return (
-    <div className="hover:bg-red-300 flex bg-red-200 rounded-xl mb-2 mt-2 flex-row-reverse items-center w-full justify-between ${open?m-2:m-2}">
+    <div className="hover:bg-violet-500 flex bg-violet-300 rounded-xl mb-2 mt-2 md:flex-row-reverse flex-col items-center md:w-full w-[60px] justify-center md:justify-between ${open?m-2:m-2}">
+      <div className="flex justify-center items-center w-[59px]">
       <HomeIcon />
-        <div className="w-full grid grid-cols-12">
-        <div className={`p-2 col-start-3 col-span-3 transition-all ${props.open?"lg:scale-100 lg:delay-700 lg:opacity-100 scale-0 opacity-0":"lg:scale-0 lg:opacity-0 lg:delay-0 scale-100 opacity-100 delay-700"} `}>{props.name}</div>
+
+      </div>
+        <div className={`${props.open?"lg:w-full md:w-0":"lg:w-0 md:w-full"} md:grid md:grid-cols-12`}>
+        <div className={` text-xs md:text-lg md:p-2 md:col-start-3 md:col-span-3 transition-all ${props.open?"lg:scale-100 lg:delay-700 lg:opacity-100 md:scale-0 md:opacity-0":"lg:scale-0 lg:opacity-0 lg:delay-0 md:scale-100 md:opacity-100 md:delay-700"} `}>{props.name}</div>
 
         </div>
     </div>

@@ -1,12 +1,9 @@
 
 import './App.css'
-import AddContentButton from './components/AddContentButton'
 import CardCollection from './components/CardCollection'
 import { TopBar } from './components/TopBar'
-import Button from './components/ui/Button'
-import { Card } from './components/ui/Card'
+import { BottomBar } from './components/ui/BottomBar'
 import  NavSidebar  from './components/ui/NavSideBar'
-import BrainIcon from './icons/BrainIcon'
 
 /*
   App name: UnBrainIt
@@ -33,13 +30,16 @@ function App() {
 
 //   )
     return (
+      <div>
+
       <div className='h-screen w-screen flex '>
         <NavSidebar></NavSidebar>
-        <div className='flex-1 overflow-auto @container md:pl-[59px] lg:pl-0 '>
+        <div className=' flex-1 overflow-auto @container md:pl-[59px] lg:pl-0 '>
           <TopBar></TopBar>
           <CardCollection></CardCollection>
         </div>
-
+      </div>
+        <BottomBar></BottomBar>
       </div>
     )
 }
