@@ -32,11 +32,12 @@ export default function CreateContentModal(props:CreateContentModalProps){
 
 interface InputComponentProps{
     placeholder:string;
+    reference?:any;
 }
-function InputComponent(props:InputComponentProps){
+export function InputComponent(props:InputComponentProps){
     return (
         <div className="flex justify-center">
-            <input type="text" className="bg-white p-2 w-5/6 my-2 rounded-lg" placeholder={props.placeholder}/>
+            <input type="text" ref={props.reference} className="bg-white p-2 w-5/6 my-2 rounded-lg" placeholder={props.placeholder}/>
         </div>
     )
 }
