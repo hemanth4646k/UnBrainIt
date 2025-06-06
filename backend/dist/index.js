@@ -22,7 +22,6 @@ const db_1 = require("./db");
 const middleware_1 = require("./middleware");
 exports.JWT_SECRET = process.env.JWT_SECRET;
 const cors_1 = __importDefault(require("cors"));
-mongoose_1.default.connect(process.env.MONGO_URL);
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
 app.use((0, cors_1.default)());
@@ -129,4 +128,14 @@ app.get('/api/v1/allcontent/:shareLink', middleware_1.middleware, (req, res) => 
         res.json({ message: "Content Not found or Inaccessible" });
     }
 }));
-app.listen(3000);
+function main() {
+    try {
+        mongoose_1.default.connect(process.env.MONGO_URL);
+    }
+    catch (e) {
+        console.log("Mongodb connection failed");
+        process.exit(1);
+    }
+    app.listen(3000);
+}
+main();

@@ -115,13 +115,13 @@ app.get('/api/v1/allcontent/:shareLink',middleware,async(req,res)=>{
     }
 });
 function main(){
-    app.listen(3000);
     try{
         mongoose.connect(process.env.MONGO_URL as string);
     }catch(e){
         console.log("Mongodb connection failed")
         process.exit(1);
     }
+    app.listen(3000);
 
 }
 main();
