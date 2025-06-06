@@ -3,7 +3,8 @@ import Embed from "./embeds/Embed";
 
 interface CardProps{
     title:string;
-    link:string;
+    type?:string;
+    link?:string;
     tags:string[];
 }
 
@@ -14,7 +15,7 @@ export function Card(props:CardProps){
             rounded-xl border border-gray-200 shadow-custom-gray ">
                 <CardTitle title={props.title}></CardTitle>
                 <div className=" h-1/2 flex justify-center bg-black">
-                    <Embed link={props.link}/>
+                    {props.link&&<Embed link={props.link}/>}
                 </div>
             </div>
             

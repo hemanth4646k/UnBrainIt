@@ -5,10 +5,11 @@ import { BACKEND_URL } from "../../config";
 
 export function useContent(){
     const [contents,setContents]=useState<any[]>([]);
+    const token=localStorage.getItem("token");
     function refresh(){
         axios.get(BACKEND_URL+"/api/v1/content",{
             headers:{
-                token:localStorage.getItem("token")
+                token:token
             }
         }).then((response)=>{
             setContents(response.data.content);

@@ -13,26 +13,7 @@ import { useContent } from '../hooks/useContents'
 */
 function DashBoard() {
 
-//   return (
-//     <div className='h-screen flex justify-center items-center'>
-//       <BrainIcon></BrainIcon>
-//       <div className='m-5'>
-//         <Button onclick={()=>{console.log("button2 CLicked")}}
-//         size='lg' text='Share' variant='secondary' startIcon="share"
-        
-//         ></Button>
-//       </div>
-//       <div className='m-5'>
-//         <Button onclick={()=>{console.log("button1 CLicked")}}
-//         size='lg' text='Add New' variant='primary' startIcon='plus'
-        
-//         ></Button>
-//       </div>
-//     </div>
-
-//   )
   const [openCreateContentModal,setOpenCreateContentModal]=useState(false);
-    
   const {contents,refresh}=useContent();
     return (
       <div>
