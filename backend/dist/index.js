@@ -12,14 +12,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.JWT_SECRET = void 0;
 const express_1 = __importDefault(require("express"));
+const dotenv_1 = __importDefault(require("dotenv"));
+dotenv_1.default.config();
 const mongoose_1 = __importDefault(require("mongoose"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const db_1 = require("./db");
 const middleware_1 = require("./middleware");
-const config_1 = require("./config");
+exports.JWT_SECRET = process.env.JWT_SECRET;
 const cors_1 = __importDefault(require("cors"));
-mongoose_1.default.connect('mongodb+srv://hemanth4646k:7BrGoqiuRNYdS4pG@cluster0.mrpucph.mongodb.net/brainly');
+mongoose_1.default.connect(process.env.MONGO_URL);
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
 app.use((0, cors_1.default)());
@@ -41,7 +44,7 @@ app.post('/api/v1/signin', (req, res) => __awaiter(void 0, void 0, void 0, funct
         password
     });
     if (user) {
-        const token = jsonwebtoken_1.default.sign(user._id.toString(), config_1.JWT_SECRET);
+        const token = jsonwebtoken_1.default.sign(user._id.toString(), exports.JWT_SECRET);
         res.json({ message: "user signed in", token });
     }
     else {

@@ -8,7 +8,6 @@ import { middleware } from "./middleware";
 export const JWT_SECRET = process.env.JWT_SECRET;
 import cors from 'cors';
 
-mongoose.connect(process.env.MONGO_URL as string);
 const app=express();
 app.use(express.json());
 app.use(cors());
@@ -115,5 +114,14 @@ app.get('/api/v1/allcontent/:shareLink',middleware,async(req,res)=>{
         res.json({message:"Content Not found or Inaccessible"});
     }
 });
+function main(){
+    app.listen(3000);
+    try{
+        mongoose.connect(process.env.MONGO_URL as string);
+    }catch(e){
+        console.log("Mongodb connection failed")
+        process.exit(1);
+    }
 
-app.listen(3000);
+}
+main();
