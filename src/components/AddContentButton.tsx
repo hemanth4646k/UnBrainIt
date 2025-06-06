@@ -2,7 +2,7 @@ import Button from "./ui/Button"
 import type { CreateContentModalProps } from "./CreateContentModal";
 
 
-export default function AddContentButton({openCreateContentModal,setOpenCreateContentModal}:CreateContentModalProps){
+export default function AddContentButton({setOpenCreateContentModal}:CreateContentModalProps){
     return(
         <div>
           <div className='m-5 lg:block hidden'>
