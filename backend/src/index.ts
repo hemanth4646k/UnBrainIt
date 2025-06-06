@@ -1,5 +1,6 @@
 import express from "express";
-require('dotenv').config();
+import dotenv from "dotenv";
+dotenv.config();
 import mongoose from "mongoose";
 import jwt from "jsonwebtoken";
 import { ContentModel, UserModel } from "./db";
