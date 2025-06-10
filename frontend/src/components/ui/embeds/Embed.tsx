@@ -1,8 +1,9 @@
+import { LinkedInEmbed } from "./LinkedInEmbed";
 import { XEmbed } from "./XEmbed";
 import { YouTubeEmbed } from "./YoutubeEmbed";
 
 
-interface EmbedProps{
+export interface EmbedProps{
     link:string;
 }
 function detectWebsite(url: string): string {
@@ -33,7 +34,8 @@ export default function Embed(props:EmbedProps){
     return (
         <div className="flex justify-center w-5/6 overflow-auto">
             {site=="YouTube"&&<YouTubeEmbed link={props.link}/>}
-            {<XEmbed link={props.link}/>}
+            {site=="X"&&<XEmbed link={props.link}/>}
+            {site=="LinkedIn"&&<LinkedInEmbed link={props.link}/>}
         </div>
     )
 }

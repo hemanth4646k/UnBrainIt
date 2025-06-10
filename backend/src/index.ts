@@ -15,6 +15,10 @@ app.post('/api/v1/signup',async (req,res)=>{
     // zod validation and hash password
     try{
         const {username,password}=req.body;
+        const userExists=await UserModel.findOne({username});
+        if(userExists){
+            res.json({errMessage:"The username is already in use"});
+        }
         await UserModel.create({username,password});
         res.json({message:"user Signed up successfully"});
         

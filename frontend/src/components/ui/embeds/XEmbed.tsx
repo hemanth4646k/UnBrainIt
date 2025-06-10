@@ -1,5 +1,3 @@
-
-
 interface XEmbedProps{
     link:string;
 }
@@ -17,8 +15,6 @@ export function convertXtoTwitter(urlString: string): string | null {
       url.hostname = 'twitter.com';
       return url.toString();
     }
-
-    // If it's neither, return the original (or null if you prefer strict check)
     return urlString;
   } catch {
     return null;
@@ -37,6 +33,7 @@ export function XEmbed(props:XEmbedProps){
             <blockquote className="twitter-tweet">
                 <a href={twitterLink}></a>    
             </blockquote>
+            <script async src="https://platform.twitter.com/widgets.js" charSet="utf-8"></script> 
         </div>
     )
 }
