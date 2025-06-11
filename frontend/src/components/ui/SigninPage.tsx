@@ -39,7 +39,7 @@
 
 import { useRef, useState } from "react";
 import Button from "./Button";
-import axios from "axios";
+import axios, { AxiosError, type AxiosResponse } from "axios";
 import {BACKEND_URL} from '../../../config'
 import { useNavigate } from "react-router-dom";
 import { InputComponent } from "./InputComponent";
@@ -79,12 +79,20 @@ export default function SigninPage(){
         }
         const username=usernameRef.current?.value;
         const password=passwordRef.current?.value;
-        const response=await axios.post(BACKEND_URL+"/api/v1/signin",{
-            username,password
-        })
-        const jwt=response.data.token;
-        localStorage.setItem('token',jwt);
-        navigate("/dashboard");
+        let response:AxiosResponse<any,any>;
+        try{
+            response=await axios.post(BACKEND_URL+"/api/v1/signin",{
+                username,password
+            });
+            const jwt=response.data.token;
+            localStorage.setItem('token',jwt);
+            navigate("/dashboard");
+        }catch(e){
+            const err=e as AxiosError<any,any>;
+            setPasswordError([...unameError,err.response?.data.errMessage]);
+
+        }
+
 
     }
     let curTime=0;

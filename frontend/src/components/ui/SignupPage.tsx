@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import Button from "./Button";
-import axios from "axios";
+import axios, { AxiosError, type AxiosResponse } from "axios";
 import {BACKEND_URL} from '../../../config'
 import { useNavigate } from "react-router-dom";
 import { InputComponent } from "./InputComponent";
@@ -41,12 +41,18 @@ export default function SignupPage(){
         const username=usernameRef.current?.value;
         const password=passwordRef.current?.value;
         console.log(username);
-        await axios.post(BACKEND_URL+"/api/v1/signup",{
-            username,password
-        })
-        alert("you have signed up");
-        navigate("/signin");
-
+        let response:AxiosResponse<any,any>;
+        try{
+            response=await axios.post(BACKEND_URL+"/api/v1/signup",{
+                username,password
+            })
+            console.log(response);
+            alert("you have signed up");
+            navigate("/signin");
+        }catch(e ){
+            const err=e as AxiosError<any,any>;
+            setUnameError([...unameError,err.response?.data.errMessage]);
+        }
     }
     let curTime=0;
     function handleUsernameChange(){
