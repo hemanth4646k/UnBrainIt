@@ -7,6 +7,7 @@ import { ContentModel, UserModel } from "./db";
 import { middleware } from "./middleware";
 export const JWT_SECRET = process.env.JWT_SECRET;
 import cors from 'cors';
+import bcrypt from 'bcrypt'
 
 const app=express();
 app.use(express.json());
@@ -17,27 +18,37 @@ app.post('/api/v1/signup',async (req,res)=>{
         const {username,password}=req.body;
         const userExists=await UserModel.findOne({username});
         if(userExists){
-            res.json({errMessage:"The username is already in use"});
+            res.status(409).json({success:false,errMessage:"The username is already in use"});
         }
-        await UserModel.create({username,password});
-        res.json({message:"user Signed up successfully"});
+        else{
+            const hashedPassword=await bcrypt.hash(password,5);
+            await UserModel.create({username,password:hashedPassword});
+            res.json({success:true,message:"user Signed up successfully"});
+        }
         
     }catch(e){
-        res.status(411).json({message:"User Already exists"});
+        res.status(401).json({success:false,errMessage:"Invalid credentials"});
     }
 });
 app.post('/api/v1/signin',async (req,res)=>{
     const {username,password}=req.body;
     const user=await UserModel.findOne({
-        username,
-        password
+        username
     });
     if(user){
-        const token=jwt.sign(user._id.toString(),JWT_SECRET as string);
-        res.json({message:"user signed in",token});
+        const correctPassword=await bcrypt.compare(password,user.password as string);
+        if(correctPassword){
+            const token=jwt.sign(user._id.toString(),JWT_SECRET as string);
+            res.json({success:true,message:"User signed in",token});
+        }else{
+            res.status(401).json({
+                success:false,
+                errorMessage:"Incorrect Username or Password"
+            })
+        }
     }
     else{
-        res.status(404).json({message:"User Not found"});
+        res.status(404).json({success:false,errMessage:"Incorrect Username or Password"});
     }
     
 });

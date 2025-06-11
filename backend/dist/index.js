@@ -22,6 +22,7 @@ const db_1 = require("./db");
 const middleware_1 = require("./middleware");
 exports.JWT_SECRET = process.env.JWT_SECRET;
 const cors_1 = __importDefault(require("cors"));
+const bcrypt_1 = __importDefault(require("bcrypt"));
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
 app.use((0, cors_1.default)());
@@ -31,27 +32,38 @@ app.post('/api/v1/signup', (req, res) => __awaiter(void 0, void 0, void 0, funct
         const { username, password } = req.body;
         const userExists = yield db_1.UserModel.findOne({ username });
         if (userExists) {
-            res.json({ errMessage: "The username is already in use" });
+            res.status(409).json({ success: false, errMessage: "The username is already in use" });
         }
-        yield db_1.UserModel.create({ username, password });
-        res.json({ message: "user Signed up successfully" });
+        else {
+            const hashedPassword = yield bcrypt_1.default.hash(password, 5);
+            yield db_1.UserModel.create({ username, password: hashedPassword });
+            res.json({ success: true, message: "user Signed up successfully" });
+        }
     }
     catch (e) {
-        res.status(411).json({ message: "User Already exists" });
+        res.status(401).json({ success: false, errMessage: "Invalid credentials" });
     }
 }));
 app.post('/api/v1/signin', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { username, password } = req.body;
     const user = yield db_1.UserModel.findOne({
-        username,
-        password
+        username
     });
     if (user) {
-        const token = jsonwebtoken_1.default.sign(user._id.toString(), exports.JWT_SECRET);
-        res.json({ message: "user signed in", token });
+        const correctPassword = yield bcrypt_1.default.compare(password, user.password);
+        if (correctPassword) {
+            const token = jsonwebtoken_1.default.sign(user._id.toString(), exports.JWT_SECRET);
+            res.json({ success: true, message: "User signed in", token });
+        }
+        else {
+            res.status(403).json({
+                success: false,
+                errorMessage: "Incorrect Username or Password"
+            });
+        }
     }
     else {
-        res.status(404).json({ message: "User Not found" });
+        res.status(404).json({ success: false, errMessage: "Incorrect Username or Password" });
     }
 }));
 app.post('/api/v1/content', middleware_1.middleware, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
